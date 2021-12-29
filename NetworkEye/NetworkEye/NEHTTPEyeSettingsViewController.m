@@ -10,7 +10,7 @@
 #import "NEHTTPEye.h"
 #import "NEHTTPModelManager.h"
 @interface NEHTTPEyeSettingsViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
-
+    
     UITableView *mainTableView;
 }
 
@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view.
     
     BOOL isiPhoneX = (([[UIScreen mainScreen] bounds].size.width == 375.f && [[UIScreen mainScreen] bounds].size.height == 812.f) || ([[UIScreen mainScreen] bounds].size.height == 375.f && [[UIScreen mainScreen] bounds].size.width == 812.f));
-
+    
     if ([[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
@@ -50,7 +50,7 @@
     titleText.textAlignment=NSTextAlignmentCenter;
     [bar addSubview:titleText];
     titleText.text=@"settings";
-
+    
     mainTableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 64+(isiPhoneX?24:0), [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64-(isiPhoneX?24:0)) style:UITableViewStyleGrouped];
     [self.view addSubview:mainTableView];
     mainTableView.dataSource=self;
@@ -84,7 +84,7 @@
         }
     }
     cell.textLabel.font=[UIFont systemFontOfSize:12];
-
+    
     if (indexPath.row==0) {
         cell.textLabel.textColor=[UIColor blackColor];
         cell.textLabel.text=@"NetworkEye Enable";
@@ -95,7 +95,7 @@
         cell.textLabel.textColor=[UIColor colorWithRed:0.88 green:0.22 blue:0.22 alpha:1];
         cell.textLabel.text=@"Clear Recorded Requests";
     }
-
+    
     
     return cell;
     
@@ -118,7 +118,7 @@
         alertView.tag=102;
         [alertView show];
     }
-
+    
     
 }
 

@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
     
     isiPhoneX = (([[UIScreen mainScreen] bounds].size.width == 375.f && [[UIScreen mainScreen] bounds].size.height == 812.f) || ([[UIScreen mainScreen] bounds].size.height == 375.f && [[UIScreen mainScreen] bounds].size.width == 812.f));
-
+    
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
     
@@ -53,15 +53,15 @@
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"NetworkEye\n"
                                                                                     attributes:@{
-                                                                                                 NSFontAttributeName : titleFont,
-                                                                                                 NSForegroundColorAttributeName: titleColor
-                                                                                                 }];
+                                                                                        NSFontAttributeName : titleFont,
+                                                                                        NSForegroundColorAttributeName: titleColor
+                                                                                    }];
     
     NSMutableAttributedString *flowCountString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"流量共%.1lfMB",flowCount]
                                                                                         attributes:@{
-                                                                                                     NSFontAttributeName : detailFont,
-                                                                                                     NSForegroundColorAttributeName: detailColor
-                                                                                                     }];
+                                                                                            NSFontAttributeName : detailFont,
+                                                                                            NSForegroundColorAttributeName: detailColor
+                                                                                        }];
     
     NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] init];
     [attrText appendAttributedString:titleString];
@@ -102,7 +102,7 @@
         UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"settings" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
         self.navigationItem.rightBarButtonItem=right;
     }
-
+    
     [self setupSearch];
     mainTableView.dataSource=self;
     mainTableView.delegate=self;
@@ -154,7 +154,7 @@
 - (void)backBtAction {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -181,7 +181,7 @@
     NEHTTPModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
     
     cell.textLabel.text=currenModel.requestURLString;
-
+    
     NSAttributedString *responseStatusCode;
     NSAttributedString *requestHTTPMethod;
     UIColor *titleColor=[UIColor colorWithRed:0.96 green:0.15 blue:0.11 alpha:1];
@@ -192,16 +192,16 @@
     UIColor *detailColor=[UIColor blackColor];
     UIFont *detailFont=[UIFont systemFontOfSize:12.0];
     responseStatusCode = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d   ",currenModel.responseStatusCode]
-                                                             attributes:@{
-                                                                          NSFontAttributeName : titleFont,
-                                                                          NSForegroundColorAttributeName: titleColor
-                                                                          }];
+                                                                attributes:@{
+                                                                    NSFontAttributeName : titleFont,
+                                                                    NSForegroundColorAttributeName: titleColor
+                                                                }];
     
     requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((NEHTTPModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
-                                                           attributes:@{
-                                                                        NSFontAttributeName : detailFont,
-                                                                        NSForegroundColorAttributeName: detailColor
-                                                                        }];
+                                                               attributes:@{
+                                                                   NSFontAttributeName : detailFont,
+                                                                   NSForegroundColorAttributeName: detailColor
+                                                               }];
     NSMutableAttributedString *detail=[[NSMutableAttributedString alloc] init];
     [detail appendAttributedString:responseStatusCode];
     [detail appendAttributedString:requestHTTPMethod];
@@ -308,7 +308,7 @@
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
 {
     [self updateSearchResultsWithSearchString:searchController.searchBar.text];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -328,15 +328,15 @@
 }
 
 - (NSString *)hardwareString {
-  int name[] = {CTL_HW,HW_MACHINE};
-  size_t size = 100;
-  sysctl(name, 2, NULL, &size, NULL, 0); // getting size of answer
-  char *hw_machine = malloc(size);
-
-  sysctl(name, 2, hw_machine, &size, NULL, 0);
-  NSString *hardware = [NSString stringWithUTF8String:hw_machine];
-  free(hw_machine);
-  return hardware;
+    int name[] = {CTL_HW,HW_MACHINE};
+    size_t size = 100;
+    sysctl(name, 2, NULL, &size, NULL, 0); // getting size of answer
+    char *hw_machine = malloc(size);
+    
+    sysctl(name, 2, hw_machine, &size, NULL, 0);
+    NSString *hardware = [NSString stringWithUTF8String:hw_machine];
+    free(hw_machine);
+    return hardware;
 }
 
 @end

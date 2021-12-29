@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class NEHTTPModel;
 
 @interface NEHTTPEyeDetailViewController : UIViewController
@@ -17,3 +19,5 @@
 @property (nonatomic,strong) NEHTTPModel *model;
 
 @end
+
+NS_ASSUME_NONNULL_END

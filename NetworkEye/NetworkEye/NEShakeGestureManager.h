@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NEShakeGestureManager : NSObject
 
 /**
@@ -23,3 +25,5 @@
 - (void)showAlertView;
 
 @end
+
+NS_ASSUME_NONNULL_END

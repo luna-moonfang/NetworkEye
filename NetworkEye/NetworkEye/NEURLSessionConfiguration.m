@@ -43,7 +43,7 @@
     self.isSwizzle=NO;
     Class cls = NSClassFromString(@"__NSCFURLSessionConfiguration") ?: NSClassFromString(@"NSURLSessionConfiguration");
     [self swizzleSelector:@selector(protocolClasses) fromClass:cls toClass:[self class]];
-
+    
 }
 
 - (void)swizzleSelector:(SEL)selector fromClass:(Class)original toClass:(Class)stub {

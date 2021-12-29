@@ -11,7 +11,10 @@
 #define kSQLitePassword @"networkeye"
 #define kSaveRequestMaxCount 300
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NEHTTPEye : NSURLProtocol
+
 /**
  *  open or close HTTP/HTTPS monitor
  *
@@ -25,4 +28,7 @@
  *  @return HTTP/HTTPS monitor state
  */
 + (BOOL)isEnabled;
+
 @end
+
+NS_ASSUME_NONNULL_END

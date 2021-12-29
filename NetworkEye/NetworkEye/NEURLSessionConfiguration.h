@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NEURLSessionConfiguration : NSObject
 @property (nonatomic,assign) BOOL isSwizzle;// whether swizzle NSURLSessionConfiguration's protocolClasses method
 
@@ -28,3 +30,5 @@
  */
 - (void)unload;
 @end
+
+NS_ASSUME_NONNULL_END

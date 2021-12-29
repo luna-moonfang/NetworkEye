@@ -69,7 +69,7 @@
     mainTextView=[[UITextView alloc] initWithFrame:CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64)];
     [self.view addSubview:mainTextView];
     model = [[NEHTTPModel alloc] init];
-
+    
     NSArray *allMapRequests = [[NEHTTPModelManager defaultManager] allMapObjects];
     for (NSInteger i=0; i < allMapRequests.count; i++) {
         NEHTTPModel *req = [allMapRequests objectAtIndex:i];
@@ -78,16 +78,16 @@
             model = req;
         }
     }
-
+    
     
 }
 
 - (void)backBtAction {
     if (![[mainTextView.text stringByTrimmingCharactersInSet:
-          [NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:model.mapJSONData] && mainTextView.text.length>0) {
-
+           [NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:model.mapJSONData] && mainTextView.text.length>0) {
+        
         model.mapJSONData = [mainTextView.text stringByTrimmingCharactersInSet:
-                              [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                             [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSRange requestPathRange = [_model.requestURLString rangeOfString:@"?"];
         NSString *requestPath;
         if (requestPathRange.location == NSNotFound) {
@@ -95,7 +95,7 @@
         }else {
             requestPath = [_model.requestURLString substringToIndex:requestPathRange.location];
         }
-
+        
         model.mapPath = requestPath;
         [[NEHTTPModelManager defaultManager] addMapObject:model];
     }else if (mainTextView.text.length==0) {
@@ -109,7 +109,7 @@
 - (void)rightAction {
     [[NEHTTPModelManager defaultManager] removeMapObject:model];
     mainTextView.text=@"";
-
+    
 }
 
 

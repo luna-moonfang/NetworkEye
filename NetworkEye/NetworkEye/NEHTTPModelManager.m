@@ -23,7 +23,7 @@
 #if FMDB_SQLCipher
     FMDatabaseQueue *sqliteDatabase;
 #endif
-
+    
 }
 @end
 
@@ -40,7 +40,7 @@
         enablePersistent = YES;
 #else
         enablePersistent = NO;
-
+        
 #endif
     }
     return self;
@@ -70,7 +70,7 @@
     NSMutableString *init_sqls=[NSMutableString stringWithCapacity:1024];
     [init_sqls appendFormat:@"create table if not exists nenetworkhttpeyes(myID double primary key,startDateString text,endDateString text,requestURLString text,requestCachePolicy text,requestTimeoutInterval double,requestHTTPMethod text,requestAllHTTPHeaderFields text,requestHTTPBody text,responseMIMEType text,responseExpectedContentLength text,responseTextEncodingName text,responseSuggestedFilename text,responseStatusCode int,responseAllHeaderFields text,receiveJSONData text);"];
 #if FMDB_SQLCipher
-
+    
     FMDatabaseQueue *queue= [FMDatabaseQueue databaseQueueWithPath:[NEHTTPModelManager filename]];
     [queue inDatabase:^(FMDatabase *db) {
         [db setKey:_sqlitePassword];
@@ -89,7 +89,7 @@
         [self deleteAllItem];
         [[NSUserDefaults standardUserDefaults] setObject:@"b" forKey:@"nenetworkhttpeyecache"];
     }
-
+    
     BOOL isNull;
     isNull=(aModel.receiveJSONData==nil);
     if (isNull) {
@@ -100,7 +100,7 @@
     NSString *sql=[NSString stringWithFormat:@"insert into nenetworkhttpeyes values('%lf','%@','%@','%@','%@','%lf','%@','%@','%@','%@','%@','%@','%@','%d','%@','%@')",aModel.myID,aModel.startDateString,aModel.endDateString,aModel.requestURLString,aModel.requestCachePolicy,aModel.requestTimeoutInterval,aModel.requestHTTPMethod,aModel.requestAllHTTPHeaderFields,aModel.requestHTTPBody,aModel.responseMIMEType,aModel.responseExpectedContentLength,aModel.responseTextEncodingName,aModel.responseSuggestedFilename,aModel.responseStatusCode,[self stringToSQLFilter:aModel.responseAllHeaderFields],receiveJSONData];
     if (enablePersistent) {
 #if FMDB_SQLCipher
-
+        
         FMDatabaseQueue *queue= [FMDatabaseQueue databaseQueueWithPath:[NEHTTPModelManager filename]];
         [queue inDatabase:^(FMDatabase *db) {
             [db setKey:_sqlitePassword];
@@ -124,7 +124,7 @@
         return allRequests;
     }
 #if FMDB_SQLCipher
-
+    
     FMDatabaseQueue *queue= [FMDatabaseQueue databaseQueueWithPath:[NEHTTPModelManager filename]];
     NSString *sql =[NSString stringWithFormat:@"select * from nenetworkhttpeyes order by myID desc"];
     NSMutableArray *array=[NSMutableArray array];
@@ -170,7 +170,7 @@
     }
     NSString *sql=[NSString stringWithFormat:@"delete from nenetworkhttpeyes"];
 #if FMDB_SQLCipher
-
+    
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:[NEHTTPModelManager filename]];
     [queue inDatabase:^(FMDatabase *db) {
         [db setKey:_sqlitePassword];

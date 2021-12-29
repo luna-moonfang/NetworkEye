@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "NEHTTPEye.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class NEHTTPModel;
-@interface NEHTTPModelManager : NSObject
-{
+
+@interface NEHTTPModelManager : NSObject {
     NSMutableArray *allRequests;
     BOOL enablePersistent;
 }
@@ -64,3 +67,5 @@
 - (void)removeAllMapObjects;
 
 @end
+
+NS_ASSUME_NONNULL_END

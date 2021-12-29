@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
+
 @interface NEHTTPModel : NSObject
 
 @property (nonatomic,strong) NSURLRequest *ne_request;
@@ -39,4 +41,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *mapJSONData;
 
 @end
+
 NS_ASSUME_NONNULL_END

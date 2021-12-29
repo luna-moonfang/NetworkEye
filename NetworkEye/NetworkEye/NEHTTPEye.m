@@ -14,47 +14,61 @@
 #import "NEURLSessionConfiguration.h"
 #import "NEKeyboardShortcutManager.h"
 #import "NEHTTPEyeViewController.h"
-@interface NEHTTPEye ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+
+
+@interface NEHTTPEye () <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+
 @property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSURLSession *session;
+
 @property (nonatomic, strong) NSURLResponse *response;
 @property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic, strong) NSDate *startDate;
-@property (nonatomic,strong) NEHTTPModel *ne_HTTPModel;
+
+@property (nonatomic, strong) NEHTTPModel *ne_HTTPModel;
+
 @end
 
+
 @implementation NEHTTPEye
+
 @synthesize ne_HTTPModel;
+
 #pragma mark - public
+
 + (void)setEnabled:(BOOL)enabled {
     [[NSUserDefaults standardUserDefaults] setDouble:enabled forKey:@"NetworkEyeEnable"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NEURLSessionConfiguration * sessionConfiguration=[NEURLSessionConfiguration defaultConfiguration];
-
+    NEURLSessionConfiguration * sessionConfiguration = [NEURLSessionConfiguration defaultConfiguration];
+    
     if (enabled) {
         [NSURLProtocol registerClass:[NEHTTPEye class]];
         if (![sessionConfiguration isSwizzle]) {
             [sessionConfiguration load];
         }
-    }else{
+    } else {
         [NSURLProtocol unregisterClass:[NEHTTPEye class]];
         if ([sessionConfiguration isSwizzle]) {
             [sessionConfiguration unload];
         }
     }
+    
 #if TARGET_OS_SIMULATOR
     [NEKeyboardShortcutManager sharedManager].enabled = enabled;
     [[NEKeyboardShortcutManager sharedManager] registerSimulatorShortcutWithKey:@"n" modifiers:UIKeyModifierCommand action:^{
         NEHTTPEyeViewController *viewController = [[NEHTTPEyeViewController alloc] init];
-        [[[[[UIApplication sharedApplication] delegate] window] rootViewController]
-         presentViewController:viewController animated:YES completion:nil];
+        [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:viewController animated:YES completion:nil];
     } description:nil];
 #endif
+
 }
 
 + (BOOL)isEnabled {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"NetworkEyeEnable"] boolValue];
 }
+
 #pragma mark - superclass methods
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -75,7 +89,6 @@
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
-    
     NSMutableURLRequest *mutableReqeust = [request mutableCopy];
     [NSURLProtocol setProperty:@YES
                         forKey:@"NEHTTPEye"
@@ -91,11 +104,11 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     self.connection = [[NSURLConnection alloc] initWithRequest:[[self class] canonicalRequestForRequest:self.request] delegate:self startImmediately:YES];
 #pragma clang diagnostic pop
-   
+    
     ne_HTTPModel=[[NEHTTPModel alloc] init];
     ne_HTTPModel.ne_request=self.request;
     ne_HTTPModel.startDateString=[self stringWithDate:[NSDate date]];
-
+    
     NSTimeInterval myID=[[NSDate date] timeIntervalSince1970];
     double randomNum=((double)(arc4random() % 100))/10000;
     ne_HTTPModel.myID=myID+randomNum;
@@ -190,7 +203,7 @@ didReceiveResponse:(NSURLResponse *)response {
                 [[self client] URLProtocol:self didLoadData:jsonData];
                 [self.data appendData:jsonData];
                 return;
-
+                
             }
         }
     }
@@ -222,7 +235,7 @@ didReceiveResponse:(NSURLResponse *)response {
     if (!returnValue || returnValue == [NSNull null]) {
         return nil;
     }
-
+    
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:returnValue options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     return jsonString;

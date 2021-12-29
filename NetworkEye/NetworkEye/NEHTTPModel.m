@@ -58,7 +58,7 @@
             self.requestAllHTTPHeaderFields=[self.requestAllHTTPHeaderFields substringFromIndex:6];
         }
     }
-
+    
     if ([ne_request HTTPBody].length>512) {
         self.requestHTTPBody=@"requestHTTPBody too long";
     }else{
@@ -141,7 +141,7 @@
     if(cookieValueArray.count > 0)
     {
         NSString *cookieString = [cookieValueArray componentsJoinedByString:@";"];
-
+        
         self.requestAllHTTPHeaderFields = [self.requestAllHTTPHeaderFields stringByAppendingString:[self formateRequestHeaderFieldKey:@"Cookie" object:cookieString]];
     }
 }
