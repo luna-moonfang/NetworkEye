@@ -18,9 +18,9 @@
 @interface NEHTTPEyeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating> {
     
     UITableView *mainTableView;
-    NSArray *httpRequests;
+    NSArray<NEHttpModel *> *httpRequests;
     UISearchController *mySearchController;
-    NSArray *filterHTTPRequests;
+    NSArray<NEHttpModel *> *filterHTTPRequests;
     BOOL isiPhoneX;
     BOOL isiPhone11;
 }
@@ -126,43 +126,28 @@
 }
 
 - (void)setupSearch {
+    filterHTTPRequests = [[NSArray alloc] init];
     
-    filterHTTPRequests=[[NSArray alloc] init];
-    
-    if (@available(iOS 13.0, *)) {
-        mySearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-        mySearchController.searchResultsUpdater = self;
-        mySearchController.searchBar.delegate = self;
-        [mySearchController.searchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-        [mySearchController.searchBar sizeToFit];
-        mainTableView.tableHeaderView = mySearchController.searchBar;
-    } else {
-        mySearchBar = [[UISearchBar alloc] init];
-        mySearchBar.delegate = self;
-        [mySearchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-        [mySearchBar sizeToFit];
-        mainTableView.tableHeaderView = mySearchBar;
-        mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:mySearchBar contentsController:self];
-        [mySearchDisplayController setDelegate:self];
-        [mySearchDisplayController setSearchResultsDataSource:self];
-        [mySearchDisplayController setSearchResultsDelegate:self];
-    }
+    mySearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    mySearchController.searchResultsUpdater = self;
+    mySearchController.searchBar.delegate = self;
+    [mySearchController.searchBar setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [mySearchController.searchBar sizeToFit];
+    mainTableView.tableHeaderView = mySearchController.searchBar;
 }
 
 - (void)backBtAction {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView == mySearchDisplayController.searchResultsTableView || (mySearchController.isActive && mySearchController.searchBar.text.length > 0)) {
+    if (mySearchController.isActive &&
+        mySearchController.searchBar.text.length > 0) {
         return filterHTTPRequests.count;
     }
     return httpRequests.count;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,37 +261,37 @@
         mainTableView.frame = CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64);
     }];
 }
-#pragma mark - UISearchDisplayDelegate
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    [self updateSearchResultsWithSearchString:searchString];
-    return YES;
-}
 
-- (void)updateSearchResultsWithSearchString:(NSString *)searchString {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NEHttpModel *httpRequest, NSDictionary *bindings) {
-            return [[NSString stringWithFormat:@"%@ %d %@ %@",httpRequest.requestURLString,httpRequest.responseStatusCode,httpRequest.requestHTTPMethod,httpRequest.responseMIMEType] rangeOfString:searchString options:NSCaseInsensitiveSearch].length > 0;
-        }]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([mySearchDisplayController.searchBar.text isEqual:searchString]) {
-                filterHTTPRequests = tempFilterHTTPRequests;
-                [mySearchDisplayController.searchResultsTableView reloadData];
-            }
-            if ([mySearchController.searchBar.text isEqual:searchString]) {
-                filterHTTPRequests = tempFilterHTTPRequests;
-                [mainTableView reloadData];
-            }
-        });
-    });
-}
+//#pragma mark - UISearchDisplayDelegate
+//
+//- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+//    [self updateSearchResultsWithSearchString:searchString];
+//    return YES;
+//}
+//
+//- (void)updateSearchResultsWithSearchString:(NSString *)searchString {
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NEHttpModel *httpRequest, NSDictionary *bindings) {
+//            return [[NSString stringWithFormat:@"%@ %d %@ %@",httpRequest.requestURLString,httpRequest.responseStatusCode,httpRequest.requestHTTPMethod,httpRequest.responseMIMEType] rangeOfString:searchString options:NSCaseInsensitiveSearch].length > 0;
+//        }]];
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if ([mySearchDisplayController.searchBar.text isEqual:searchString]) {
+//                filterHTTPRequests = tempFilterHTTPRequests;
+//                [mySearchDisplayController.searchResultsTableView reloadData];
+//            }
+//            if ([mySearchController.searchBar.text isEqual:searchString]) {
+//                filterHTTPRequests = tempFilterHTTPRequests;
+//                [mainTableView reloadData];
+//            }
+//        });
+//    });
+//}
 
 #pragma mark - UISearchControllerDelegate
 
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
-{
-    [self updateSearchResultsWithSearchString:searchController.searchBar.text];
-    
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+//    [self updateSearchResultsWithSearchString:searchController.searchBar.text];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -316,11 +301,12 @@
 
 #pragma mark - private methods
 - (NEHttpModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
-    NEHttpModel *currenModel=[[NEHttpModel alloc] init];
-    if (tableView == mySearchDisplayController.searchResultsTableView || (mySearchController.isActive && mySearchController.searchBar.text.length > 0)) {
-        currenModel=(NEHttpModel *)((filterHTTPRequests)[indexPath.row]);
-    }else{
-        currenModel=(NEHttpModel *)((httpRequests)[indexPath.row]);
+    NEHttpModel *currenModel = [[NEHttpModel alloc] init];
+    if (mySearchController.isActive &&
+        mySearchController.searchBar.text.length > 0) {
+        currenModel = filterHTTPRequests[indexPath.row];
+    } else {
+        currenModel = httpRequests[indexPath.row];
     }
     return currenModel;
 }
