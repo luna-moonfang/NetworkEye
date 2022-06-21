@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DemoViewController.h"
-#import "NEHTTPEye.h"
-#import "NetworkEye/NEHTTPModelManager.h"
+#import "NEHttpEye.h"
+#import "NetworkEye/NEHttpModelManager.h"
 @interface AppDelegate ()
 
 @end
@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 #if defined(DEBUG)||defined(_DEBUG)
-    [NEHTTPEye setEnabled:YES];
+    [NEHttpEye setEnabled:YES];
 #endif
 
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:[[DemoViewController alloc] init]];

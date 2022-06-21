@@ -14,11 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 #if TARGET_OS_SIMULATOR
 
 @interface NEKeyboardShortcutManager : NSObject
+
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled;
 
 + (instancetype)sharedManager;
 
-- (void)registerSimulatorShortcutWithKey:(NSString *)key modifiers:(UIKeyModifierFlags)modifiers action:(dispatch_block_t)action description:(NSString *)description;
+- (void)registerSimulatorShortcutWithKey:(NSString *)key modifiers:(UIKeyModifierFlags)modifiers action:(dispatch_block_t)action description:(nullable NSString *)description;
 
 @end
 #endif

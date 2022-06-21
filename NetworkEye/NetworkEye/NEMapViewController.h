@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NEHTTPModel;
+@class NEHttpModel;
 @interface NEMapViewController : UIViewController
-@property (nonatomic,strong) NEHTTPModel *model;
+@property (nonatomic,strong) NEHttpModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 //
-//  NEHTTPEye.h
+//  NEHttpEye.h
 //  NetworkEye
 //
 //  Created by coderyi on 15/11/3.
@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#define kSQLitePassword @"networkeye"
-#define kSaveRequestMaxCount 300
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NEHTTPEye : NSURLProtocol
+extern NSString *const NEHttpEyeSQLitePassword;
+extern const NSInteger NEHttpEyeSaveRequestMaxCount;
+
+@interface NEHttpEye : NSURLProtocol
 
 /**
  *  open or close HTTP/HTTPS monitor
@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return HTTP/HTTPS monitor state
  */
 + (BOOL)isEnabled;
+
+/// 流量
++ (double)flowCount;
 
 @end
 

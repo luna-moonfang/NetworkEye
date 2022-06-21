@@ -7,8 +7,8 @@
 //
 
 #import "NEHTTPEyeSettingsViewController.h"
-#import "NEHTTPEye.h"
-#import "NEHTTPModelManager.h"
+#import "NEHttpEye.h"
+#import "NEHttpModelManager.h"
 @interface NEHTTPEyeSettingsViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
     UITableView *mainTableView;
@@ -78,8 +78,7 @@
         if (indexPath.row==0) {
             UISwitch *switch1=[[UISwitch alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-70, 7, 60, 40)];
             [cell.contentView addSubview:switch1];
-            BOOL NetworkEyeEnable=[[[NSUserDefaults standardUserDefaults] objectForKey:@"NetworkEyeEnable"] boolValue];
-            switch1.on=NetworkEyeEnable;
+            switch1.on = [NEHttpEye isEnabled];
             [switch1 addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
         }
     }
@@ -102,9 +101,7 @@
 }
 
 - (void)switchAction:(UISwitch *)tempSwitch {
-    [[NSUserDefaults standardUserDefaults] setDouble:tempSwitch.on forKey:@"NetworkEyeEnable"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [NEHTTPEye setEnabled:tempSwitch.on];
+    [NEHttpEye setEnabled:tempSwitch.on];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,12 +123,12 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0){
     if(alertView.tag ==101){
         if(buttonIndex==0){
-            [[NEHTTPModelManager defaultManager] removeAllMapObjects];
+            [[NEHttpModelManager defaultManager] removeAllMapObjects];
         }
         return;
     }
     if(buttonIndex==0){
-        [[NEHTTPModelManager defaultManager] deleteAllItem];
+        [[NEHttpModelManager defaultManager] deleteAllItem];
     }
 }
 

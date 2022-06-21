@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NEURLSessionConfiguration : NSObject
-@property (nonatomic,assign) BOOL isSwizzle;// whether swizzle NSURLSessionConfiguration's protocolClasses method
+
+@property (nonatomic, assign) BOOL swizzled; // whether swizzle NSURLSessionConfiguration's protocolClasses method
 
 /**
  *  get NEURLSessionConfiguration's singleton object
@@ -29,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  make NSURLSessionConfiguration's protocolClasses method is normal
  */
 - (void)unload;
+
 @end
 
 NS_ASSUME_NONNULL_END

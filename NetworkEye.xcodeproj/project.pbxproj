@@ -16,11 +16,11 @@
 		0A4EF8531BEB66FF000D2D7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EF8511BEB66FF000D2D7E /* LaunchScreen.storyboard */; };
 		0A4EF85E1BEB66FF000D2D7E /* NetworkEyeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF85D1BEB66FF000D2D7E /* NetworkEyeTests.m */; };
 		0A4EF8691BEB66FF000D2D7E /* NetworkEyeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8681BEB66FF000D2D7E /* NetworkEyeUITests.m */; };
-		0A4EF8951BEB6735000D2D7E /* NEHTTPEye.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8801BEB6735000D2D7E /* NEHTTPEye.m */; };
+		0A4EF8951BEB6735000D2D7E /* NEHttpEye.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8801BEB6735000D2D7E /* NEHttpEye.m */; };
 		0A4EF8961BEB6735000D2D7E /* NEHTTPEyeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8821BEB6735000D2D7E /* NEHTTPEyeDetailViewController.m */; };
 		0A4EF8971BEB6735000D2D7E /* NEHTTPEyeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8841BEB6735000D2D7E /* NEHTTPEyeViewController.m */; };
-		0A4EF8981BEB6735000D2D7E /* NEHTTPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8861BEB6735000D2D7E /* NEHTTPModel.m */; };
-		0A4EF8991BEB6735000D2D7E /* NEHTTPModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8881BEB6735000D2D7E /* NEHTTPModelManager.m */; };
+		0A4EF8981BEB6735000D2D7E /* NEHttpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8861BEB6735000D2D7E /* NEHttpModel.m */; };
+		0A4EF8991BEB6735000D2D7E /* NEHttpModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF8881BEB6735000D2D7E /* NEHttpModelManager.m */; };
 		0A4EF89A1BEB6735000D2D7E /* NEShakeGestureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF88A1BEB6735000D2D7E /* NEShakeGestureManager.m */; };
 		0A4EF89F1BEB673D000D2D7E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EF89E1BEB673D000D2D7E /* DemoViewController.m */; };
 		0A4EF8A11BEB676C000D2D7E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4EF8A01BEB676C000D2D7E /* libsqlite3.0.tbd */; };
@@ -66,16 +66,16 @@
 		0A4EF8641BEB66FF000D2D7E /* NetworkEyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkEyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4EF8681BEB66FF000D2D7E /* NetworkEyeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkEyeUITests.m; sourceTree = "<group>"; };
 		0A4EF86A1BEB66FF000D2D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A4EF87F1BEB6735000D2D7E /* NEHTTPEye.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHTTPEye.h; sourceTree = "<group>"; };
-		0A4EF8801BEB6735000D2D7E /* NEHTTPEye.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHTTPEye.m; sourceTree = "<group>"; };
+		0A4EF87F1BEB6735000D2D7E /* NEHttpEye.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHttpEye.h; sourceTree = "<group>"; };
+		0A4EF8801BEB6735000D2D7E /* NEHttpEye.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHttpEye.m; sourceTree = "<group>"; };
 		0A4EF8811BEB6735000D2D7E /* NEHTTPEyeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHTTPEyeDetailViewController.h; sourceTree = "<group>"; };
 		0A4EF8821BEB6735000D2D7E /* NEHTTPEyeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHTTPEyeDetailViewController.m; sourceTree = "<group>"; };
 		0A4EF8831BEB6735000D2D7E /* NEHTTPEyeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHTTPEyeViewController.h; sourceTree = "<group>"; };
 		0A4EF8841BEB6735000D2D7E /* NEHTTPEyeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHTTPEyeViewController.m; sourceTree = "<group>"; };
-		0A4EF8851BEB6735000D2D7E /* NEHTTPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHTTPModel.h; sourceTree = "<group>"; };
-		0A4EF8861BEB6735000D2D7E /* NEHTTPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHTTPModel.m; sourceTree = "<group>"; };
-		0A4EF8871BEB6735000D2D7E /* NEHTTPModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHTTPModelManager.h; sourceTree = "<group>"; };
-		0A4EF8881BEB6735000D2D7E /* NEHTTPModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHTTPModelManager.m; sourceTree = "<group>"; };
+		0A4EF8851BEB6735000D2D7E /* NEHttpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHttpModel.h; sourceTree = "<group>"; };
+		0A4EF8861BEB6735000D2D7E /* NEHttpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHttpModel.m; sourceTree = "<group>"; };
+		0A4EF8871BEB6735000D2D7E /* NEHttpModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEHttpModelManager.h; sourceTree = "<group>"; };
+		0A4EF8881BEB6735000D2D7E /* NEHttpModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEHttpModelManager.m; sourceTree = "<group>"; };
 		0A4EF8891BEB6735000D2D7E /* NEShakeGestureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEShakeGestureManager.h; sourceTree = "<group>"; };
 		0A4EF88A1BEB6735000D2D7E /* NEShakeGestureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEShakeGestureManager.m; sourceTree = "<group>"; };
 		0A4EF89D1BEB673D000D2D7E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
@@ -187,12 +187,12 @@
 		0A4EF8761BEB6735000D2D7E /* NetworkEye */ = {
 			isa = PBXGroup;
 			children = (
-				0A4EF87F1BEB6735000D2D7E /* NEHTTPEye.h */,
-				0A4EF8801BEB6735000D2D7E /* NEHTTPEye.m */,
-				0A4EF8851BEB6735000D2D7E /* NEHTTPModel.h */,
-				0A4EF8861BEB6735000D2D7E /* NEHTTPModel.m */,
-				0A4EF8871BEB6735000D2D7E /* NEHTTPModelManager.h */,
-				0A4EF8881BEB6735000D2D7E /* NEHTTPModelManager.m */,
+				0A4EF87F1BEB6735000D2D7E /* NEHttpEye.h */,
+				0A4EF8801BEB6735000D2D7E /* NEHttpEye.m */,
+				0A4EF8851BEB6735000D2D7E /* NEHttpModel.h */,
+				0A4EF8861BEB6735000D2D7E /* NEHttpModel.m */,
+				0A4EF8871BEB6735000D2D7E /* NEHttpModelManager.h */,
+				0A4EF8881BEB6735000D2D7E /* NEHttpModelManager.m */,
 				0A1202E11BF097BC00B710A9 /* NEURLSessionConfiguration.h */,
 				0A1202E21BF097BC00B710A9 /* NEURLSessionConfiguration.m */,
 				0A4EF8831BEB6735000D2D7E /* NEHTTPEyeViewController.h */,
@@ -401,17 +401,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A1202E31BF097BC00B710A9 /* NEURLSessionConfiguration.m in Sources */,
-				0A4EF8951BEB6735000D2D7E /* NEHTTPEye.m in Sources */,
+				0A4EF8951BEB6735000D2D7E /* NEHttpEye.m in Sources */,
 				0A4EF89A1BEB6735000D2D7E /* NEShakeGestureManager.m in Sources */,
 				A18C22DD1D98239A008E40C6 /* NEMapViewController.m in Sources */,
 				0A4EF8481BEB66FF000D2D7E /* AppDelegate.m in Sources */,
 				0A4EF89F1BEB673D000D2D7E /* DemoViewController.m in Sources */,
 				0A4EF8451BEB66FF000D2D7E /* main.m in Sources */,
-				0A4EF8981BEB6735000D2D7E /* NEHTTPModel.m in Sources */,
+				0A4EF8981BEB6735000D2D7E /* NEHttpModel.m in Sources */,
 				0A4EF8961BEB6735000D2D7E /* NEHTTPEyeDetailViewController.m in Sources */,
 				EE6CCB621DB1BB6D00EAA45F /* NEKeyboardShortcutManager.m in Sources */,
 				0A4EF8971BEB6735000D2D7E /* NEHTTPEyeViewController.m in Sources */,
-				0A4EF8991BEB6735000D2D7E /* NEHTTPModelManager.m in Sources */,
+				0A4EF8991BEB6735000D2D7E /* NEHttpModelManager.m in Sources */,
 				0ADE8CFA1BF4999A0096A1E5 /* NEHTTPEyeSettingsViewController.m in Sources */,
 				0A09FAC01BF6FC3F0009EC53 /* UIWindow+NEExtension.m in Sources */,
 			);

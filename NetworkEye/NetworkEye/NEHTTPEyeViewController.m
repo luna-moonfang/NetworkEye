@@ -8,18 +8,17 @@
 
 #import "NEHTTPEyeViewController.h"
 
-#import "NEHTTPModel.h"
-#import "NEHTTPModelManager.h"
+#import "NEHttpModel.h"
+#import "NEHttpModelManager.h"
 #import "NEHTTPEyeDetailViewController.h"
 #import "NEHTTPEyeSettingsViewController.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-@interface NEHTTPEyeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UISearchControllerDelegate,UISearchResultsUpdating> {
+@interface NEHTTPEyeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating> {
+    
     UITableView *mainTableView;
     NSArray *httpRequests;
-    UISearchBar *mySearchBar;
-    UISearchDisplayController *mySearchDisplayController;
     UISearchController *mySearchController;
     NSArray *filterHTTPRequests;
     BOOL isiPhoneX;
@@ -33,7 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     isiPhoneX = (([[UIScreen mainScreen] bounds].size.width == 375.f && [[UIScreen mainScreen] bounds].size.height == 812.f) || ([[UIScreen mainScreen] bounds].size.height == 375.f && [[UIScreen mainScreen] bounds].size.width == 812.f));
     
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -42,7 +40,7 @@
     mainTableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64-(isiPhoneX?24:0)) style:UITableViewStylePlain];
     [self.view addSubview:mainTableView];
     
-    double flowCount=[[[NSUserDefaults standardUserDefaults] objectForKey:@"flowCount"] doubleValue];
+    double flowCount=[[NSUserDefaults.standardUserDefaults objectForKey:@"flowCount"] doubleValue];
     if (!flowCount) {
         flowCount=0.0;
     }
@@ -53,15 +51,15 @@
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"NetworkEye\n"
                                                                                     attributes:@{
-                                                                                        NSFontAttributeName : titleFont,
-                                                                                        NSForegroundColorAttributeName: titleColor
-                                                                                    }];
+        NSFontAttributeName : titleFont,
+        NSForegroundColorAttributeName: titleColor
+    }];
     
     NSMutableAttributedString *flowCountString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"流量共%.1lfMB",flowCount]
                                                                                         attributes:@{
-                                                                                            NSFontAttributeName : detailFont,
-                                                                                            NSForegroundColorAttributeName: detailColor
-                                                                                        }];
+        NSFontAttributeName : detailFont,
+        NSForegroundColorAttributeName: detailColor
+    }];
     
     NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] init];
     [attrText appendAttributedString:titleString];
@@ -106,7 +104,7 @@
     [self setupSearch];
     mainTableView.dataSource=self;
     mainTableView.delegate=self;
-    httpRequests=[[[[NEHTTPModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
+    httpRequests=[[[[NEHttpModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
     
     isiPhone11 = [[self hardwareString] containsString:@"iPhone12"];
     if (@available(iOS 13.0, *)) {
@@ -118,7 +116,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    httpRequests=[[[[NEHTTPModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
+    httpRequests=[[[[NEHttpModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
     [mainTableView reloadData];
 }
 
@@ -178,7 +176,7 @@
     }
     cell.textLabel.font=[UIFont systemFontOfSize:12];
     cell.textLabel.textColor=[UIColor colorWithRed:0.24f green:0.51f blue:0.78f alpha:1.00f];
-    NEHTTPModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
+    NEHttpModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
     
     cell.textLabel.text=currenModel.requestURLString;
     
@@ -193,15 +191,15 @@
     UIFont *detailFont=[UIFont systemFontOfSize:12.0];
     responseStatusCode = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d   ",currenModel.responseStatusCode]
                                                                 attributes:@{
-                                                                    NSFontAttributeName : titleFont,
-                                                                    NSForegroundColorAttributeName: titleColor
-                                                                }];
+        NSFontAttributeName : titleFont,
+        NSForegroundColorAttributeName: titleColor
+    }];
     
-    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((NEHTTPModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
+    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((NEHttpModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
                                                                attributes:@{
-                                                                   NSFontAttributeName : detailFont,
-                                                                   NSForegroundColorAttributeName: detailColor
-                                                               }];
+        NSFontAttributeName : detailFont,
+        NSForegroundColorAttributeName: detailColor
+    }];
     NSMutableAttributedString *detail=[[NSMutableAttributedString alloc] init];
     [detail appendAttributedString:responseStatusCode];
     [detail appendAttributedString:requestHTTPMethod];
@@ -286,7 +284,7 @@
 
 - (void)updateSearchResultsWithSearchString:(NSString *)searchString {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NEHTTPModel *httpRequest, NSDictionary *bindings) {
+        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NEHttpModel *httpRequest, NSDictionary *bindings) {
             return [[NSString stringWithFormat:@"%@ %d %@ %@",httpRequest.requestURLString,httpRequest.responseStatusCode,httpRequest.requestHTTPMethod,httpRequest.responseMIMEType] rangeOfString:searchString options:NSCaseInsensitiveSearch].length > 0;
         }]];
         
@@ -317,12 +315,12 @@
 }
 
 #pragma mark - private methods
-- (NEHTTPModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
-    NEHTTPModel *currenModel=[[NEHTTPModel alloc] init];
+- (NEHttpModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    NEHttpModel *currenModel=[[NEHttpModel alloc] init];
     if (tableView == mySearchDisplayController.searchResultsTableView || (mySearchController.isActive && mySearchController.searchBar.text.length > 0)) {
-        currenModel=(NEHTTPModel *)((filterHTTPRequests)[indexPath.row]);
+        currenModel=(NEHttpModel *)((filterHTTPRequests)[indexPath.row]);
     }else{
-        currenModel=(NEHTTPModel *)((httpRequests)[indexPath.row]);
+        currenModel=(NEHttpModel *)((httpRequests)[indexPath.row]);
     }
     return currenModel;
 }

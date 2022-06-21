@@ -8,7 +8,7 @@
 
 #import "DemoViewController.h"
 
-#import "NEHTTPEye.h"
+#import "NEHttpEye.h"
 #import "NEHTTPEyeViewController.h"
 
 @interface DemoViewController ()

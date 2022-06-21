@@ -1,5 +1,5 @@
 //
-//  NEHTTPModelManager.h
+//  NEHttpModelManager.h
 //  NetworkEye
 //
 //  Created by coderyi on 15/11/4.
@@ -8,19 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NEHTTPEye.h"
+#import "NEHttpEye.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NEHTTPModel;
+@class NEHttpModel;
 
-@interface NEHTTPModelManager : NSObject {
+@interface NEHttpModelManager : NSObject {
     NSMutableArray *allRequests;
     BOOL enablePersistent;
 }
 
-@property(nonatomic,strong) NSString *sqlitePassword;
-@property(nonatomic,assign) int saveRequestMaxCount;
+@property (nonatomic, copy) NSString *sqlitePassword;
+@property (nonatomic, assign) NSInteger saveRequestMaxCount;
 
 /**
  *  get recorded requests 's SQLite filename
@@ -30,29 +30,29 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)filename;
 
 /**
- *  get NEHTTPModelManager's singleton object
+ *  get NEHttpModelManager's singleton object
  *
  *  @return singleton object
  */
-+ (NEHTTPModelManager *)defaultManager;
++ (NEHttpModelManager *)defaultManager;
 
 /**
- *  create NEHTTPModel table
+ *  create NEHttpModel table
  */
 - (void)createTable;
 
 
 /**
- *  add a NEHTTPModel object to SQLite
+ *  add a NEHttpModel object to SQLite
  *
- *  @param aModel a NEHTTPModel object
+ *  @param aModel a NEHttpModel object
  */
-- (void)addModel:(NEHTTPModel *) aModel;
+- (void)addModel:(NEHttpModel *) aModel;
 
 /**
- *  get SQLite all NEHTTPModel object
+ *  get SQLite all NEHttpModel object
  *
- *  @return all NEHTTPModel object
+ *  @return all NEHttpModel object
  */
 - (NSMutableArray *)allobjects;
 
@@ -62,8 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) deleteAllItem;
 
 - (NSMutableArray *)allMapObjects;
-- (void)addMapObject:(NEHTTPModel *)mapReq;
-- (void)removeMapObject:(NEHTTPModel *)mapReq;
+- (void)addMapObject:(NEHttpModel *)mapReq;
+- (void)removeMapObject:(NEHttpModel *)mapReq;
 - (void)removeAllMapObjects;
 
 @end
